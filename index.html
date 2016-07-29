@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script type="text/javascript" src="node_modules/systemjs/dist/system.src.js"></script>
+    <script type="text/javascript" src="system-config.js"></script>
+    <script type="text/javascript">
+      System.config({
+      bundles: {
+        "out.js": [ "lib/modB.js"],
+      }
+      });
+      window.require = SystemJS.amdRequire;
+      window.define = SystemJS.amdDefine;
+      require(["modA"]);
+      setTimeout(function () {
+        require(["modC", "lib/modB"]);
+      }, 10);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
