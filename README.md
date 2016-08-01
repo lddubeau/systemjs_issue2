@@ -7,7 +7,7 @@ systemjs-builder: 0.15.25 and 0.15.26
 
 ### Steps to reproduce the problem
 
-1. Clone this repo: https://github.com/lddubeau/systemjs_issue1
+1. Clone this repo: https://github.com/lddubeau/systemjs_issue2
 
 2. ``npm install``.
 
