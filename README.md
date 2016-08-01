@@ -2,8 +2,8 @@
 
 At the time of submitting the issue:
 
-systemjs: 0.19.35
-systemjs-builder: 0.15.25
+systemjs: 0.19.35 and 0.19.36
+systemjs-builder: 0.15.25 and 0.15.26
 
 ### Steps to reproduce the problem
 
@@ -62,18 +62,13 @@ Everything should load without error. Files should be loaded once and only once.
 
 ### Actual behavior
 
-`modC.js` fails to load properly. Two HTTP requests are made for it, and its loading ends with an error.
+Two HTTP requests are made for `modC.js`
 
 Errors on the console:
 
 ```
-Assertion failed: is loading Uncaught (in promise)
-Error: (SystemJS) Unable to load dependency http://localhost:3000/js/modC.js.(…)
-Uncaught (in promise) Error: (SystemJS) load.execute is not a function(…)
+Uncaught (in promise) Error: (SystemJS) Cannot read property 'length' of null(…)
+Uncaught (in promise) Error: (SystemJS) Cannot read property 'length' of null(…)
 ```
 
-I've also seen an error triggered by `normalizedDeps` being `null` at [this line](https://github.com/systemjs/systemjs/blob/3d097d90485a3ceaf5751b5b2709ab7606502105/dist/system.src.js#L3086).
-
-### Observations
-
-I ran into this problem while trying to port a large application based on RequireJS to SystemJS. The code base has worked fine with RequireJS for years. It also works with SystemJS so long as I don't try to load a bundle that calls out to a module that lives outside the bundle.
+By putting breakpoints and stepping through code I've found that this error is triggered by `normalizedDeps` being `null` at [this line](https://github.com/systemjs/systemjs/blob/3d097d90485a3ceaf5751b5b2709ab7606502105/dist/system.src.js#L3086).
